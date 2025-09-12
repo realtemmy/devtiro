@@ -14,4 +14,4 @@ services:
     # - Do so here as this is a builder
 
     environment:
-      POSTGRES_PASSWORD: changemeinprod!
+      POSTGRES_PASSWORD: temiloluwa

@@ -3,6 +3,7 @@ package com.devtiro.tasks.services.impl;
 import com.devtiro.tasks.domain.entities.TaskList;
 import com.devtiro.tasks.repositories.TaskListRepository;
 import com.devtiro.tasks.services.TaskListService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ public class TaskListServiceImpl implements TaskListService {
         }
 
         LocalDateTime now = LocalDateTime.now();
-        taskListRepository.save(new TaskList(
+        return taskListRepository.save(new TaskList(
                 null,
                 taskList.getTitle(),
                 taskList.getDescription(),
@@ -45,7 +46,6 @@ public class TaskListServiceImpl implements TaskListService {
                 now
 
         ));
-        return null;
     }
 
     @Override
@@ -53,6 +53,7 @@ public class TaskListServiceImpl implements TaskListService {
         return taskListRepository.findById(id);
     }
 
+    @Transactional
     @Override
     public TaskList updateTaskList(UUID taskListId, TaskList taskList) {
         if(null == taskList.getId()){
